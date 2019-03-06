@@ -2,20 +2,21 @@
   "endpoints": [
     {
       "id": 1,
-      "website": {
-        "value": "sonuc.ysk.gov.tr",
-        "endpoints": [
-          {
-            "value": "getIlList"
-          },
-          {
-            "value": "getUlkeList"
-          },
-          {
-            "value": "getDisTemsilcilikList"
-          }
-        ]
-      }
+      "url": "https://sonuc.ysk.gov.tr/api/getSecimList?secimSayi=9&araSecim=0&yenilemeSecimi=0",
+      "data_length": 9,
+      "expected": "[{\"birim_ID\":1,\"secim_ADI\":\"CUMHURBAŞKANI VE 27.DÖNEM MİLLETVEKİLİ GENEL SEÇİMİ\",\"secim_TARIHI\":\"2018-06-23T21:00:00.000+0000\",\"secim_BASLANGIC_TARIHI\":\"2018-04-29T21:00:00.000+0000\",\"adaylik_KESINLESME_TARIHI\":\"2018-05-28T21:00:00.000+0000\",\"secmen_SON_HAREKET_TARIHI\":\"2018-05-20T21:00:00.000+0000\",\"ara_SECIM\":0,\"yenileme_SECIMI\":0,\"yenilenen_SECIM_ID\":0,\"yenileme_VERI_OLUSTURMA_TARIHI\":null,\"yenileme_VERISI_OLUSTURAN_PERS\":null,\"resmi_GAZETE_TARIHI\":\"2018-07-03T21:00:00.000+0000\",\"secim_TIPI\":null,\"secmen_DEGISIKLIK_LISTE_TARIHI\":null,\"secim_ID\":16300,\"secim_DETAY_SAYI\":2,\"yurtdisi_SAYI\":4344},{\"birim_ID\":1,\"secim_ADI\":\"2017 HALKOYLAMASI\",\"secim_TARIHI\":\"2017-04-15T21:00:00.000+0000\",\"secim_BASLANGIC_TARIHI\":\"2017-02-15T21:00:00.000+0000\",\"adaylik_KESINLESME_TARIHI\":null,\"secmen_SON_HAREKET_TARIHI\":\"2017-03-09T21:00:00.000+0000\",\"ara_SECIM\":0,\"yenileme_SECIMI\":0,\"yenilenen_SECIM_ID\":0,\"yenileme_VERI_OLUSTURMA_TARIHI\":null,\"yenileme_VERISI_OLUSTURAN_PERS\":null,\"resmi_GAZETE_TARIHI\":\"2017-04-25T21:00:00.000+0000\",\"secim_TIPI\":null,\"secmen_DEGISIKLIK_LISTE_TARIHI\":null,\"secim_ID\":15575,\"secim_DETAY_SAYI\":1,\"yurtdisi_SAYI\":4308},{\"birim_ID\":1,\"secim_ADI\":\"26.DÖNEM MİLLETVEKİLİ GENEL SEÇİMİ\",\"secim_TARIHI\":\"2015-10-31T21:00:00.000+0000\",\"secim_BASLANGIC_TARIHI\":\"2015-08-30T21:00:00.000+0000\",\"adaylik_KESINLESME_TARIHI\":\"2015-09-27T21:00:00.000+0000\",\"secmen_SON_HAREKET_TARIHI\":\"2015-09-19T21:00:00.000+0000\",\"ara_SECIM\":0,\"yenileme_SECIMI\":0,\"yenilenen_SECIM_ID\":0,\"yenileme_VERI_OLUSTURMA_TARIHI\":null,\"yenileme_VERISI_OLUSTURAN_PERS\":null,\"resmi_GAZETE_TARIHI\":\"2015-11-11T21:00:00.000+0000\",\"secim_TIPI\":null,\"secmen_DEGISIKLIK_LISTE_TARIHI\":null,\"secim_ID\":14868,\"secim_DETAY_SAYI\":1,\"yurtdisi_SAYI\":5349},{\"birim_ID\":1,\"secim_ADI\":\"25.DÖNEM MİLLETVEKİLİ GENEL SEÇİMİ\",\"secim_TARIHI\":\"2015-06-06T21:00:00.000+0000\",\"secim_BASLANGIC_TARIHI\":\"2015-03-09T21:00:00.000+0000\",\"adaylik_KESINLESME_TARIHI\":\"2015-04-22T21:00:00.000+0000\",\"secmen_SON_HAREKET_TARIHI\":\"2015-04-07T21:00:00.000+0000\",\"ara_SECIM\":0,\"yenileme_SECIMI\":0,\"yenilenen_SECIM_ID\":0,\"yenileme_VERI_OLUSTURMA_TARIHI\":null,\"yenileme_VERISI_OLUSTURAN_PERS\":null,\"resmi_GAZETE_TARIHI\":\"2015-06-14T21:00:00.000+0000\",\"secim_TIPI\":null,\"secmen_DEGISIKLIK_LISTE_TARIHI\":null,\"secim_ID\":13884,\"secim_DETAY_SAYI\":1,\"yurtdisi_SAYI\":7316},{\"birim_ID\":1,\"secim_ADI\":\"ONİKİNCİ CUMHURBAŞKANI SEÇİMİ\",\"secim_TARIHI\":\"2014-08-09T21:00:00.000+0000\",\"secim_BASLANGIC_TARIHI\":\"2014-06-28T21:00:00.000+0000\",\"adaylik_KESINLESME_TARIHI\":\"2014-07-09T21:00:00.000+0000\",\"secmen_SON_HAREKET_TARIHI\":\"2014-07-19T21:00:00.000+0000\",\"ara_SECIM\":0,\"yenileme_SECIMI\":0,\"yenilenen_SECIM_ID\":0,\"yenileme_VERI_OLUSTURMA_TARIHI\":null,\"yenileme_VERISI_OLUSTURAN_PERS\":null,\"resmi_GAZETE_TARIHI\":\"2014-08-14T21:00:00.000+0000\",\"secim_TIPI\":null,\"secmen_DEGISIKLIK_LISTE_TARIHI\":null,\"secim_ID\":13340,\"secim_DETAY_SAYI\":1,\"yurtdisi_SAYI\":4777},{\"birim_ID\":1,\"secim_ADI\":\"30 MART 2014 MAHALLİ İDARELER GENEL SEÇİMİ\",\"secim_TARIHI\":\"2014-03-29T21:00:00.000+0000\",\"secim_BASLANGIC_TARIHI\":\"2013-12-31T21:00:00.000+0000\",\"adaylik_KESINLESME_TARIHI\":\"2014-03-01T21:00:00.000+0000\",\"secmen_SON_HAREKET_TARIHI\":\"2014-02-06T21:00:00.000+0000\",\"ara_SECIM\":0,\"yenileme_SECIMI\":0,\"yenilenen_SECIM_ID\":0,\"yenileme_VERI_OLUSTURMA_TARIHI\":null,\"yenileme_VERISI_OLUSTURAN_PERS\":null,\"resmi_GAZETE_TARIHI\":\"2014-05-05T21:00:00.000+0000\",\"secim_TIPI\":null,\"secmen_DEGISIKLIK_LISTE_TARIHI\":null,\"secim_ID\":11979,\"secim_DETAY_SAYI\":4,\"yurtdisi_SAYI\":0},{\"birim_ID\":1,\"secim_ADI\":\"XXIV.DÖNEM MİLLETVEKİLİ GENEL SEÇİMİ\",\"secim_TARIHI\":\"2011-06-11T21:00:00.000+0000\",\"secim_BASLANGIC_TARIHI\":\"2011-03-13T21:00:00.000+0000\",\"adaylik_KESINLESME_TARIHI\":\"2011-04-24T21:00:00.000+0000\",\"secmen_SON_HAREKET_TARIHI\":\"2011-04-07T21:00:00.000+0000\",\"ara_SECIM\":0,\"yenileme_SECIMI\":0,\"yenilenen_SECIM_ID\":0,\"yenileme_VERI_OLUSTURMA_TARIHI\":null,\"yenileme_VERISI_OLUSTURAN_PERS\":null,\"resmi_GAZETE_TARIHI\":\"2011-06-21T21:00:00.000+0000\",\"secim_TIPI\":null,\"secmen_DEGISIKLIK_LISTE_TARIHI\":null,\"secim_ID\":7468,\"secim_DETAY_SAYI\":1,\"yurtdisi_SAYI\":6989},{\"birim_ID\":1,\"secim_ADI\":\"2010 HALKOYLAMASI\",\"secim_TARIHI\":\"2010-09-11T21:00:00.000+0000\",\"secim_BASLANGIC_TARIHI\":\"2010-05-30T21:00:00.000+0000\",\"adaylik_KESINLESME_TARIHI\":null,\"secmen_SON_HAREKET_TARIHI\":\"2010-07-02T21:00:00.000+0000\",\"ara_SECIM\":0,\"yenileme_SECIMI\":0,\"yenilenen_SECIM_ID\":0,\"yenileme_VERI_OLUSTURMA_TARIHI\":null,\"yenileme_VERISI_OLUSTURAN_PERS\":null,\"resmi_GAZETE_TARIHI\":\"2010-09-21T21:00:00.000+0000\",\"secim_TIPI\":null,\"secmen_DEGISIKLIK_LISTE_TARIHI\":null,\"secim_ID\":6522,\"secim_DETAY_SAYI\":1,\"yurtdisi_SAYI\":8590},{\"birim_ID\":1,\"secim_ADI\":\"29 MART 2009 MAHALLİ İDARELER SEÇİMİ\",\"secim_TARIHI\":\"2009-03-28T21:00:00.000+0000\",\"secim_BASLANGIC_TARIHI\":\"2008-12-31T21:00:00.000+0000\",\"adaylik_KESINLESME_TARIHI\":\"2009-02-27T21:00:00.000+0000\",\"secmen_SON_HAREKET_TARIHI\":\"2009-02-09T21:00:00.000+0000\",\"ara_SECIM\":0,\"yenileme_SECIMI\":0,\"yenilenen_SECIM_ID\":0,\"yenileme_VERI_OLUSTURMA_TARIHI\":null,\"yenileme_VERISI_OLUSTURAN_PERS\":null,\"resmi_GAZETE_TARIHI\":\"2009-05-10T21:00:00.000+0000\",\"secim_TIPI\":null,\"secmen_DEGISIKLIK_LISTE_TARIHI\":null,\"secim_ID\":4290,\"secim_DETAY_SAYI\":4,\"yurtdisi_SAYI\":0}]"
+    },
+    {
+      "id": 2,
+      "url": "https://sonuc.ysk.gov.tr/sorgu",
+      "data_length": null,
+      "expected": ""
+    },
+    {
+      "id": 3,
+      "url": "http://www.ysk.gov.tr",
+      "data_length": null,
+      "expected": ""
     }
   ]
 }
