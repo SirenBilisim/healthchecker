@@ -1,0 +1,21 @@
+{
+  "endpoints": [
+    {
+      "id": 1,
+      "website": {
+        "value": "sonuc.ysk.gov.tr",
+        "endpoints": [
+          {
+            "value": "getIlList"
+          },
+          {
+            "value": "getUlkeList"
+          },
+          {
+            "value": "getDisTemsilcilikList"
+          }
+        ]
+      }
+    }
+  ]
+}
