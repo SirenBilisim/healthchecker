@@ -5,55 +5,114 @@ const request = require('request-promise');
 const schedule = require('node-schedule');
 const nodemailer = require("nodemailer");
 const _ = require('lodash');
-
+const util = require('util');
+const cors = require('cors')
+let counter = 0;
 
 const obj = JSON.parse(fs.readFileSync('endpoints.json', 'utf8'));
-const result = [];
+let success = [];
+let errors = [];
 
 //Requests
-app.use(express.json());
+app.use(express.json({limit: '50mb'}));
+app.use(cors());
 
 app.get('/', function (req, res) {
   res.send(obj);
 });
 
-app.post('/save', function (req, res) {
-  res.json({requestBody: req.body});
+app.get('/getLogs', function (req, res) {
+  const data = fs.readFileSync('logs.json');
+  data != null ? res.send(JSON.parse(data)) : res.status(500).send('No value present!');
+});
+
+app.get('/checkLogs', function (req, res) {
+  if (makeRequest()) {
+    res.status(200).json({status: "ok"});
+  } else {
+    res.status(500).send('An error occured!');
+  }
+});
+
+app.post('/create', function (req, res) {
+  const temObj = {};
+  temObj.url = req.body.url;
+  temObj.data_length = req.body.data_length;
+  temObj.expected_output = req.body.expected_output;
+
+
+  try {
+    // Read file
+    const rawdata = fs.readFileSync('endpoints.json');
+    const endpoints = JSON.parse(rawdata).endpoints;
+    endpoints.push(temObj);
+    const lastObject = {};
+    lastObject.endpoints = endpoints;
+    // Delete file
+    fs.unlinkSync('endpoints.json');
+    // Create the file
+    fs.writeFile('endpoints.json', JSON.stringify(lastObject, null, ' '), (err) => {
+      if (err) throw err;
+    });
+    res.status(200).json({status: "ok", message: "Saved successfully!"});
+  } catch (e) {
+    res.status(500).send('An error occured!');
+  }
 });
 
 
 async function makeRequest() {
+  success = [];
+  errors = [];
   for (let i = 0; i < obj.endpoints.length; i++) {
     const tempData = {};
     try {
       await request.get(obj.endpoints[i].url, function (err, res, body) {
-        if (res !== undefined) {
+        if (res !== undefined && !err) {
           tempData.statusCode = res.statusCode;
 
-          if (res.headers['content-type'] !== "text/html") {
+          tempData.link_url = obj.endpoints[i].url;
+
+          if (!res.headers['content-type'].includes("text/html")) {
             JSON.parse(res.body).length === obj.endpoints[i].data_length ? tempData.isEqualLength = true : tempData.isEqualLength = false;
 
-            _.isEqual(JSON.parse(res.body), JSON.parse(obj.endpoints[i].expected)) ? tempData.isEqualJson = true : tempData.isEqualJson = false;
+            _.isEqual(JSON.parse(res.body), JSON.parse(obj.endpoints[i].expected_output)) ? tempData.isEqualJson = true : tempData.isEqualJson = false;
+          } else {
+            tempData.isEqualLength = 'No data';
+            tempData.isEqualJson = 'No data';
           }
 
-          result.push(tempData);
+          success.push(tempData);
         }
       });
     } catch (e) {
-      console.error(e);
-      result.push(e);
+      counter++;
+      errors.push(e);
+      counter < 2 ? sendMail().catch(console.error) : '';
     }
   }
 
-  sendMail().catch(console.error);
+  if (errors.length === 0) {
+    counter = 0;
+  }
+
+  fs.unlinkSync('logs.json');
+
+  const result = success.concat(errors);
+
+  fs.writeFile('logs.json', JSON.stringify(result, null, ' '), (err) => {
+    if (err) throw err;
+  });
+
+  return true;
 }
 
-// schedule.scheduleJob({hour: 16, minute: 52}, function () {
+// schedule.scheduleJob({hour: 15, minute: 27}, function () {
 //   makeRequest();
 // });
-// setInterval(function () {
-//   makeRequest();
-// }, 50000);
+setInterval(function () {
+  makeRequest();
+}, 300000);
 
 // Send Mail
 async function sendMail() {
@@ -61,10 +120,10 @@ async function sendMail() {
   let transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 587,
-    secure: false, // true for 465, false for other ports
+    secure: false,
     auth: {
-      user: 'mert.akel@sirenbilisim.com.tr', // generated ethereal user
-      pass: '' // generated ethereal password
+      user: 'mert.akel@sirenbilisim.com.tr',
+      pass: 'siren2010'
     }
   });
 
@@ -72,8 +131,8 @@ async function sendMail() {
   let mailOptions = {
     from: 'mert.akel@sirenbilisim.com.tr', // sender address
     to: "akelmert95@gmail.com", // list of receivers
-    subject: "Health Checker Info", // Subject line
-    text: "Result \n" + JSON.stringify(result),
+    subject: "Health Checker Error", // Subject line
+    text: "Error \n" + JSON.stringify(errors),
   };
 
   // send mail with defined transport object
