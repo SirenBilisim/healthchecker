@@ -9,7 +9,6 @@ const util = require('util');
 const cors = require('cors')
 let counter = 0;
 
-const obj = JSON.parse(fs.readFileSync('endpoints.json', 'utf8'));
 let success = [];
 let errors = [];
 
@@ -18,6 +17,7 @@ app.use(express.json({limit: '50mb'}));
 app.use(cors());
 
 app.get('/', function (req, res) {
+  const obj = JSON.parse(fs.readFileSync('endpoints.json', 'utf8'));
   res.send(obj);
 });
 
@@ -49,12 +49,23 @@ app.post('/create', function (req, res) {
     const lastObject = {};
     lastObject.endpoints = endpoints;
     // Delete file
-    fs.unlinkSync('endpoints.json');
-    // Create the file
-    fs.writeFile('endpoints.json', JSON.stringify(lastObject, null, ' '), (err) => {
-      if (err) throw err;
+    // fs.unlinkSync('endpoints.json');
+
+    fs.unlink('endpoints.json', function (err) {
+      if (err && err.code == 'ENOENT') {
+        console.info("File doesn't exist, won't remove it.");
+        res.status(500).send('An error occured!');
+      } else if (err) {
+        res.status(500).send('An error occured!');
+      } else {
+        // Create the file
+        fs.writeFile('endpoints.json', JSON.stringify(lastObject, null, ' '), (err) => {
+          if (err) throw err;
+        });
+        res.status(200).json({status: "ok", message: "Saved successfully!"});
+      }
     });
-    res.status(200).json({status: "ok", message: "Saved successfully!"});
+
   } catch (e) {
     res.status(500).send('An error occured!');
   }
@@ -62,6 +73,7 @@ app.post('/create', function (req, res) {
 
 
 async function makeRequest() {
+  const obj = JSON.parse(fs.readFileSync('endpoints.json', 'utf8'));
   success = [];
   errors = [];
   for (let i = 0; i < obj.endpoints.length; i++) {
@@ -96,23 +108,31 @@ async function makeRequest() {
     counter = 0;
   }
 
-  fs.unlinkSync('logs.json');
+  // fs.unlinkSync('logs.json');
 
-  const result = success.concat(errors);
+  fs.unlink('logs.json', function (err) {
+    if (err && err.code == 'ENOENT') {
+      console.info("File doesn't exist, won't remove it.");
+    } else if (err) {
+      console.error("Error occurred while trying to remove file");
+    } else {
+      const result = success.concat(errors);
 
-  fs.writeFile('logs.json', JSON.stringify(result, null, ' '), (err) => {
-    if (err) throw err;
+      fs.writeFile('logs.json', JSON.stringify(result, null, ' '), (err) => {
+        if (err) throw err;
+      });
+      return true;
+    }
   });
-
-  return true;
 }
 
-// schedule.scheduleJob({hour: 15, minute: 27}, function () {
-//   makeRequest();
-// });
 setInterval(function () {
   makeRequest();
 }, 300000);
+
+// setInterval(function () {
+//   makeRequest();
+// }, 50000);
 
 // Send Mail
 async function sendMail() {

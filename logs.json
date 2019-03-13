@@ -1,0 +1,38 @@
+[
+ {
+  "statusCode": 200,
+  "link_url": "https://jsonplaceholder.typicode.com/todos",
+  "isEqualLength": true,
+  "isEqualJson": true
+ },
+ {
+  "statusCode": 200,
+  "link_url": "https://jsonplaceholder.typicode.com/posts",
+  "isEqualLength": true,
+  "isEqualJson": true
+ },
+ {
+  "statusCode": 200,
+  "link_url": "https://jsonplaceholder.typicode.com/comments",
+  "isEqualLength": true,
+  "isEqualJson": true
+ },
+ {
+  "statusCode": 200,
+  "link_url": "https://jsonplaceholder.typicode.com/albums",
+  "isEqualLength": true,
+  "isEqualJson": true
+ },
+ {
+  "statusCode": 200,
+  "link_url": "https://jsonplaceholder.typicode.com/todos",
+  "isEqualLength": true,
+  "isEqualJson": true
+ },
+ {
+  "statusCode": 200,
+  "link_url": "https://jsonplaceholder.typicode.com/users",
+  "isEqualLength": true,
+  "isEqualJson": true
+ }
+]

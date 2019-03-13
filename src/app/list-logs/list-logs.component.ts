@@ -9,6 +9,9 @@ import {EndpointServices} from '../_services/endpoint_services';
 export class ListLogsComponent implements OnInit {
 
   logData;
+  currentPage = 1;
+  itemsPerPage = 10;
+  pageSize: number;
 
   constructor(public endpointServices: EndpointServices
   ) {
@@ -28,7 +31,6 @@ export class ListLogsComponent implements OnInit {
   checkLogs() {
     this.endpointServices.checkLogs().subscribe(
       (result) => {
-        debugger;
         if (result.status === 'ok') {
           this.endpointServices.getLogs().subscribe(
             (data) => {
@@ -44,5 +46,9 @@ export class ListLogsComponent implements OnInit {
         console.log(err);
       }
     );
+  }
+
+  public onPageChange(pageNum: number): void {
+    this.pageSize = this.itemsPerPage * (pageNum - 1);
   }
 }

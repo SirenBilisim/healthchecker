@@ -1,0 +1,10 @@
+/deep/ .pagination .page-item .page-link {
+  border-radius: 0 !important;
+}
+
+/deep/ .pagination .page-link {
+  border-top-style: none !important;
+  border-bottom-style: none !important;
+  background-color: #f6f6f6 !important;
+  color: black !important;
+}
